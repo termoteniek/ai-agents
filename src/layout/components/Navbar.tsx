@@ -17,6 +17,11 @@ const navLinks = [
 // Section IDs for active state detection
 const sectionIds = ["home", "services", "gallery", "testimonials", "contact"];
 
+// Helper function to extract section ID from href (removes leading "#")
+const getSectionIdFromHref = (href: string): string => {
+  return href.startsWith("#") ? href.slice(1) : href;
+};
+
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -115,17 +120,17 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: 0.1 * index }}
                   onClick={() => scrollToSection(link.href)}
-                  className={`font-body text-base font-medium transition-all duration-300 relative group ${
-                    activeSection === link.href.slice(1)
-                      ? "text-terracotta"
-                      : "text-darkText hover:text-terracotta"
-                  }`}
+                 className={`font-body text-base font-medium transition-all duration-300 relative group ${
+                     activeSection === getSectionIdFromHref(link.href)
+                       ? "text-terracotta"
+                       : "text-darkText hover:text-terracotta"
+                   }`}
                 >
                   {link.label}
                   {/* Active state underline */}
                   <motion.span
                     className={`absolute bottom-0 left-0 right-0 h-0.5 bg-terracotta transition-all duration-300 ${
-                      activeSection === link.href.slice(1)
+                      activeSection === getSectionIdFromHref(link.href)
                         ? "w-full opacity-100"
                         : "w-0 opacity-0 group-hover:w-full group-hover:opacity-50"
                     }`}
@@ -217,14 +222,14 @@ export default function Navbar() {
                           whileHover={{ x: 8, backgroundColor: "rgba(194, 91, 59, 0.1)" }}
                           whileTap={{ scale: 0.98 }}
                           onClick={() => scrollToSection(link.href)}
-                          className={`w-full text-left px-4 py-3 rounded-image font-body text-lg font-medium transition-all duration-300 ${
-                            activeSection === link.href.slice(1)
-                              ? "text-terracotta bg-terracotta/5"
-                              : "text-darkText hover:text-terracotta"
-                          }`}
-                        >
-                          {link.label}
-                          {activeSection === link.href.slice(1) && (
+                        className={`w-full text-left px-4 py-3 rounded-image font-body text-lg font-medium transition-all duration-300 ${
+                             activeSection === getSectionIdFromHref(link.href)
+                               ? "text-terracotta bg-terracotta/5"
+                               : "text-darkText hover:text-terracotta"
+                           }`}
+                         >
+                           {link.label}
+                           {activeSection === getSectionIdFromHref(link.href) && (
                             <motion.span
                               layoutId="activeLink"
                               className="absolute left-0 top-0 bottom-0 w-1 bg-terracotta rounded-r"
