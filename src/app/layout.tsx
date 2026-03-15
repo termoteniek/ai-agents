@@ -1,12 +1,8 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Open_Sans, Geist } from "next/font/google";
+import { Playfair_Display, Open_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/layout/components/Navbar";
 import Footer from "@/layout/components/Footer";
-import { cn } from "@/lib/utils";
-
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
-
 
 // Configure Playfair Display for headings
 const playfairDisplay = Playfair_Display({
@@ -34,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn(playfairDisplay.variable, openSans.variable, "font-sans", geist.variable)}>
+    <html lang="en" className={`${playfairDisplay.variable} ${openSans.variable}`}>
       <body className={`font-body ${openSans.variable}`}>
         {/* Layout wrapper for navbar and footer */}
         <div className="min-h-screen flex flex-col">
